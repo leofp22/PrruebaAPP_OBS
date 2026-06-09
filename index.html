@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Auditoría Lite</title>
+    <title>Buscador de Verduras</title>
 </head>
 <body>
-    <h2>Nueva Observación</h2>
-    <input id="titulo" placeholder="Título de la observación">
-    <textarea id="desc" placeholder="Descripción..."></textarea>
-    <button onclick="guardarObs()">Guardar en Local</button>
+    <h2>Consultar base de datos de verduras</h2>
+    <input type="text" id="busqueda" placeholder="Ej: Espinaca">
+    <button onclick="buscarVerdura()">Consultar</button>
 
-    <h3>Historial</h3>
-    <ul id="lista"></ul>
+    <div id="resultado" style="margin-top: 20px;"></div>
 
     <script>
-        function guardarObs() {
-            const titulo = document.getElementById('titulo').value;
-            const desc = document.getElementById('desc').value;
-            
-            // Creamos un objeto JSON
-            const nuevaObs = { titulo, desc, fecha: new Date().toISOString() };
-            
-            // Guardamos en el almacenamiento local del navegador (como prueba rápida)
-            let datos = JSON.parse(localStorage.getItem('auditoria') || '[]');
-            datos.push(nuevaObs);
-            localStorage.setItem('auditoria', JSON.stringify(datos));
-            
-            renderizar();
-        }
+        let dbVerduras = [];
 
-        function renderizar() {
-            const datos = JSON.parse(localStorage.getItem('auditoria') || '[]');
-            const lista = document.getElementById('lista');
-            lista.innerHTML = datos.map(item => `<li>${item.titulo}: ${item.desc}</li>`).join('');
-        }
+        // Cargamos el JSON al iniciar
+        fetch('verduras.json')
+            .then(response => response.json())
+            .then(data => { dbVerduras = data; });
 
-        renderizar(); // Carga inicial
+        function buscarVerdura() {
+            const query = document.getElementById('busqueda').value.toLowerCase();
+            const res = dbVerduras.find(v => v.nombre.toLowerCase() === query);
+            
+            const div = document.getElementById('resultado');
+            if (res) {
+                div.innerHTML = `<strong>${res.nombre}</strong><br>
+                                 Calorías: ${res.calorias}<br>
+                                 Índice Glucémico: ${res.ig}<br>
+                                 Rubro: ${res.rubro}`;
+            } else {
+                div.innerHTML = "No se encontró esa verdura.";
+            }
+        }
     </script>
 </body>
 </html>
