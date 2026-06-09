@@ -1,0 +1,12 @@
+[
+  {"nombre": "Espinaca", "calorias": 23, "ig": 15, "rubro": "Hoja verde"},
+  {"nombre": "Zanahoria", "calorias": 41, "ig": 35, "rubro": "Raíz"},
+  {"nombre": "Brócoli", "calorias": 34, "ig": 15, "rubro": "Crucífera"},
+  {"nombre": "Calabaza", "calorias": 26, "ig": 75, "rubro": "Zapallo"},
+  {"nombre": "Tomate", "calorias": 18, "ig": 15, "rubro": "Fruto"},
+  {"nombre": "Papa", "calorias": 77, "ig": 85, "rubro": "Tubérculo"},
+  {"nombre": "Lechuga", "calorias": 15, "ig": 15, "rubro": "Hoja verde"},
+  {"nombre": "Cebolla", "calorias": 40, "ig": 15, "rubro": "Bulbo"},
+  {"nombre": "Berenjena", "calorias": 25, "ig": 20, "rubro": "Fruto"},
+  {"nombre": "Acelga", "calorias": 19, "ig": 15, "rubro": "Hoja verde"}
+]
