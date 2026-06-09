@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auditoría Lite</title>
+</head>
+<body>
+    <h2>Nueva Observación</h2>
+    <input id="titulo" placeholder="Título de la observación">
+    <textarea id="desc" placeholder="Descripción..."></textarea>
+    <button onclick="guardarObs()">Guardar en Local</button>
+
+    <h3>Historial</h3>
+    <ul id="lista"></ul>
+
+    <script>
+        function guardarObs() {
+            const titulo = document.getElementById('titulo').value;
+            const desc = document.getElementById('desc').value;
+            
+            // Creamos un objeto JSON
+            const nuevaObs = { titulo, desc, fecha: new Date().toISOString() };
+            
+            // Guardamos en el almacenamiento local del navegador (como prueba rápida)
+            let datos = JSON.parse(localStorage.getItem('auditoria') || '[]');
+            datos.push(nuevaObs);
+            localStorage.setItem('auditoria', JSON.stringify(datos));
+            
+            renderizar();
+        }
+
+        function renderizar() {
+            const datos = JSON.parse(localStorage.getItem('auditoria') || '[]');
+            const lista = document.getElementById('lista');
+            lista.innerHTML = datos.map(item => `<li>${item.titulo}: ${item.desc}</li>`).join('');
+        }
+
+        renderizar(); // Carga inicial
+    </script>
+</body>
+</html>
